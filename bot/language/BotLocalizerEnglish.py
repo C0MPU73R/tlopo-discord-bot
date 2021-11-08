@@ -16,27 +16,28 @@ in Discord channels where English is the spoken language.
 All strings in this class will be in English only.
 """
 
-OUT_OF_DATE = "This bot is out of date. Please update by visiting https://github.com/TheLegendofPiratesOnline/discord-bot"
+OUT_OF_DATE = "This bot is out of date. Please update by visiting " \
+              "https://github.com/TheLegendofPiratesOnline/discord-bot "
 
 FLEET_ITEM_INFO = '''
-%s:
-    - Type: %s
-    - State: %s
-    - Ships Remaining: %s
+{}:
+    - Type: {}
+    - State: {}
+    - Ships Remaining: {}
 '''
 
 INVASION_ITEM_INFO = '''
-%s:
-    - Location: %s
-    - State: %s
-    - Phase: %s
-    - Num Players: %s
+{}:
+    - Location: {}
+    - State: {}
+    - Phase: {}
+    - Num Players: {}
 '''
 
 SYSTEM_STATUS_INFO = '''
-Overall Status: **%s**
-%s
-Reported Outages: %s
+Overall Status: **{}**
+{}
+Reported Outages: {}
 '''
 
-OCEANS_TOTAL = '\nTotal: **%s**'
+OCEANS_TOTAL = '\nTotal: **{}**'

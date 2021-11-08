@@ -21,6 +21,7 @@ Those files will have the same name as this class +
 the language they are in.  For example, BotLocalizerEnglish.
 """
 
+
 def importLanguageModule(module):
     """
     Imports other language modules and places them
@@ -33,5 +34,6 @@ def importLanguageModule(module):
         x = __import__('bot.language.BotLocalizerEnglish', {}, {}, ['bot.language'])
     globals().update(x.__dict__)
 
-## TODO: Process other languages from settings.
+
+# TODO: Process other languages from settings.
 importLanguageModule('English')

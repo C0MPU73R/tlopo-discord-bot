@@ -16,6 +16,7 @@ from bot.core import BotGlobals
 
 from datetime import datetime
 
+
 class Commands:
     """
     The Commands class will house all commands provided by the
@@ -41,7 +42,7 @@ class Commands:
             total = 0
 
             for i, k in sorted(oceans.items()):
-                output += "%s: %s\n" % (i, k)
+                output += "{}: {}\n".format(i, k)
                 total += k
 
             if s.get('status', 0) == 3:
@@ -67,9 +68,9 @@ class Commands:
             elif fleets:
                 for i, k in sorted(fleets.items()):
                     output += BotLocalizer.FLEET_ITEM_INFO % (i,
-                                                            k.get('type'),
-                                                            k.get('state'),
-                                                            k.get('shipsRemaining'))
+                                                              k.get('type'),
+                                                              k.get('state'),
+                                                              k.get('shipsRemaining'))
             else:
                 output = "No active fleets."
 
@@ -91,10 +92,10 @@ class Commands:
             elif invasions:
                 for i, k in sorted(invasions.items()):
                     output += BotLocalizer.INVASION_ITEM_INFO % (i,
-                                                              k.get('location'),
-                                                              k.get('state'),
-                                                              k.get('phase'),
-                                                              k.get('numPlayers'))
+                                                                 k.get('location'),
+                                                                 k.get('state'),
+                                                                 k.get('phase'),
+                                                                 k.get('numPlayers'))
             else:
                 output = "No active invasions."
 
@@ -122,9 +123,10 @@ class Commands:
                         flag = BotGlobals.SRV_CODE_TO_STATUS.get(int(notice.get('flag')))
 
                         tmp += "\n**%s** | %s\n**Message:** *%s*\n" % (
-                                                    flag, i, msg)
+                            flag, i, msg)
                 elif s.get('status', 0) == 3:
-                    tmp = "\nThe Legend of Pirates Online is currently closed for an update. Check https://status.tlopo.com for more information!\n"
+                    tmp = "\nThe Legend of Pirates Online is currently closed for an update. " \
+                          "Check https://status.tlopo.com for more information!\n"
                 else:
                     tmp = "\nNo known notices."
 
@@ -141,6 +143,6 @@ class Commands:
             """
 
             output = 'Pong!'
-            
+
             # Response
             await ctx.send(output)

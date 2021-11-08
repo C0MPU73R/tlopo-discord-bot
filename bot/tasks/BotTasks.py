@@ -14,6 +14,7 @@ import threading
 import requests
 import json
 
+
 class BotTasks:
     """
     The BotTasks class will be responsible for
@@ -32,7 +33,7 @@ class BotTasks:
         for task in tasks:
             getattr(self, task)(task, tasks.get(task))
 
-    ## BOT TASKS
+    # BOT TASKS
     """
     Example Task Function
 
@@ -48,7 +49,7 @@ class BotTasks:
 
     def task_news_notification(self, name, task):
         threading.Timer(task.get('time'), getattr(self, name), args=[name, task]).start()
-        # TODO.
+        # TODO -- notify
 
     def task_news_feed(self, name, task):
         threading.Timer(task.get('time'), getattr(self, name), args=[name, task]).start()
@@ -56,7 +57,7 @@ class BotTasks:
 
     def task_system_status(self, name, task):
         threading.Timer(task.get('time'), getattr(self, name), args=[name, task]).start()
-        resp = self.contactAPI(task.get('api_url'))
+        resp = self.contactAPI()  # URL TODO
         if resp:
             servers = resp.get('servers')
             if servers:
@@ -67,15 +68,12 @@ class BotTasks:
             else:
                 outages = []
 
-            out = {}
-            out['status'] = resp.get('status')
-            out['notices'] = resp.get('notices', 0) or None
-            out['outages'] = outages or None
+            out = {'status': resp.get('status'), 'notices': resp.get('notices', 0) or None, 'outages': outages or None}
             self.setSystemStatus(out)
 
     def task_shards(self, name, task):
         threading.Timer(task.get('time'), getattr(self, name), args=[name, task]).start()
-        resp = self.contactAPI(task.get('api_url'))
+        resp = self.contactAPI()
         if resp:
             fleets = {}
             invasions = {}
@@ -109,8 +107,9 @@ class BotTasks:
             self.setActiveInvasions(invasions)
             self.setOceanPopulations(populations)
 
-    ## Other task functions.
-    def contactAPI(self, apiUrl):
+    # Other task functions.
+    @staticmethod
+    def contactAPI(apiUrl):
         """
         Contacts API and return its response in JSON format.
         """
@@ -120,10 +119,9 @@ class BotTasks:
         try:
             # Just in case the API url dies, it's sanity check this.
             r = json.loads(r.text)
-        except:
+        except ConnectionError:
             print(":BotTasks(error): Failed to contact API.")
             r = None
-
         return r
 
     def setActiveFleets(self, fleets):
